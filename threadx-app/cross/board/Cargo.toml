@@ -14,17 +14,17 @@ test = false
 
 
 [dependencies]
-cortex-m = { version = "0.7", features = ["critical-section-single-core"] }
-cortex-m-rt = "0.7"
-defmt = "0.3"
-defmt-rtt = "0.4"
-panic-probe = { version = "0.3", features = ["print-defmt"] }
-cortex-m-semihosting = "0.5.0"
-threadx-sys = { path = "../../../threadx-sys"}
 
-[dependencies.stm32f1xx-hal]
-version = "0.10.0"
-features = ["stm32f103", "medium"]
+cortex-m = { workspace = true, features = ["critical-section-single-core"] }
+cortex-m-rt = { workspace = true}
+defmt = { workspace = true}
+defmt-rtt = { workspace = true}
+panic-probe = { workspace = true, features = ["print-defmt"] }
+cortex-m-semihosting = { workspace = true}
+threadx-sys = { workspace = true}
+threadx-rs = { workspace = true}
+stm32f1xx-hal = {workspace = true, version = "0.10.0", features = ["stm32f103", "medium"]}
+
 
 [dev-dependencies]
 defmt-test = "0.3"
