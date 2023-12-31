@@ -1,5 +1,8 @@
 # `ThreadX example Rust application`
 
+The application follows a structure defined at https://ferrous-systems.com/blog/test-embedded-app/. This organizes
+the project into separately testable parts. Read the blog to learn how to run the tests.
+
 ## Dependencies
 
 #### 1. `flip-link`:
