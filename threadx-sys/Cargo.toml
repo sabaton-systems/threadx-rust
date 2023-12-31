@@ -1,0 +1,20 @@
+[package]
+name = "threadx-sys"
+version = "0.1.2"
+authors = ["Sojan James <Sojan.James@gmail.com>"]
+edition = "2021"
+description = "Rust bindings for ThreadX"
+homepage = "https://github.com/sjames/threadx-sys"
+build = "build.rs"
+links = "threadx"
+license-file = "LICENSE"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+cmake = "0.1.50"
+bindgen = "0.69.1"
+
+[dependencies]
+
+

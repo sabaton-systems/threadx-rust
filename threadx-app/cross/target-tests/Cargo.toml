@@ -1,0 +1,26 @@
+[package]
+name = "target-tests"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[[test]]
+name = "stm32f103"
+harness = false
+
+[dev-dependencies]
+board = { path = "../board" }
+
+# cortex-m = "0.6.7"
+defmt = "0.3"
+defmt-rtt = "0.4"
+panic-probe = { version = "0.3", features = ["print-defmt"] }
+# [features]
+# default = ['defmt-trace']
+# # these features are required by defmt
+# defmt-default = []
+# defmt-trace = []
+# defmt-debug = []
+# defmt-info = []
+# defmt-warn = []
+# defmt-error = []

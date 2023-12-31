@@ -1,0 +1,8 @@
+[workspace]
+
+resolver = "2"
+
+members = [
+  "threadx-app/host-target-tests",
+  "threadx-app/xtask",
+]

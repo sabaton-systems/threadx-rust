@@ -1,0 +1,40 @@
+[package]
+name = "board"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# makes `cargo check --all-targets` (used by Rust-Analyzer) work
+[lib]
+bench = false
+doctest = false
+test = false
+
+
+[dependencies]
+cortex-m = { version = "0.7", features = ["critical-section-single-core"] }
+cortex-m-rt = "0.7"
+defmt = "0.3"
+defmt-rtt = "0.4"
+panic-probe = { version = "0.3", features = ["print-defmt"] }
+cortex-m-semihosting = "0.5.0"
+threadx-sys = { path = "../../../threadx-sys"}
+
+[dependencies.stm32f1xx-hal]
+version = "0.10.0"
+features = ["stm32f103", "medium"]
+
+[dev-dependencies]
+defmt-test = "0.3"
+
+[features]
+# these features are required by defmt
+defmt-default = []
+defmt-trace = []
+defmt-debug = []
+defmt-info = []
+defmt-warn = []
+defmt-error = []
+
