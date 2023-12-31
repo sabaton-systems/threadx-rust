@@ -14,6 +14,9 @@ pub mod semaphore;
 pub mod allocator;
 pub mod timer;
 
+pub use threadx_sys::_tx_timer_interrupt as tx_timer_interrupt;
+pub use threadx_sys::__tx_PendSVHandler as tx_pendsv_handler;
+
 /// Initialize ThreadX
 
 /// This callback is called by threadx for low level initialization. 
