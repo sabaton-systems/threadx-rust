@@ -1,6 +1,6 @@
 [package]
 name = "threadx-sys"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["Sojan James <Sojan.James@gmail.com>"]
 edition = "2021"
 description = "Rust bindings for ThreadX"

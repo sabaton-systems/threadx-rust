@@ -1,6 +1,5 @@
 // Build script for Building threadx and to create the bindings
 
-use std::cell::RefCell;
 use std::io::{Write, BufRead};
 use std::os::unix::fs::OpenOptionsExt;
 use std::path::PathBuf;
@@ -16,8 +15,8 @@ fn main() {
     let out_dir = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR is not set"));
     let tx_user_file = env::var("TX_USER_FILE").ok();
     let src_path = out_dir.join("threadx"); // source code of threadx is vendored here
-    let threadx_gh = "https://github.com/azure-rtos/threadx.git";
-    let threadx_tag = "v6.3.0_rel";
+    let threadx_gh = "https://github.com/eclipse-threadx/threadx.git";
+    let threadx_tag = "v6.4.0_rel";
 
     let tx_user_file_path = 
     if let Some(tx_user_file) = tx_user_file {
@@ -186,7 +185,7 @@ fn main() {
             continue;
         }
         if line.contains("End of search list.") {
-            inside_include_dirs = false;
+            //inside_include_dirs = false;
             break;
         }
         if inside_include_dirs {
@@ -220,7 +219,7 @@ fn main() {
 }
 
 // Configure the builder
-fn configure_builder(mut builder : Builder, int_macros: Arc<Mutex<Vec<(String,String)>>>) -> Builder {
+fn configure_builder( builder : Builder, int_macros: Arc<Mutex<Vec<(String,String)>>>) -> Builder {
     builder
     .fit_macro_constants(false)
     .parse_callbacks(Box::new(Callbacks{int_macros}))
