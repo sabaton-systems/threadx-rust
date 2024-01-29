@@ -8,3 +8,8 @@ board.
 
 The API is still evolving.  Collaborators are welcome.
 
+
+## Example application
+
+An example application is available at https://github.com/sabaton-systems/threadx-rust/tree/main/threadx-app/cross
+
