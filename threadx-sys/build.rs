@@ -85,6 +85,7 @@ fn main() {
         "thumbv7em-none-eabi" => "cmake/cortex_m4.cmake",
         "thumbv7em-none-eabihf" => "cmake/cortex_m7.cmake",
         "thumbv8m.base-none-eabi" => "cmake/cortex_m23.cmake",
+        "x86_64-unknown-linux-gnu" => "cmake/linux/gnu/CMakeLists.txt",
         _ => {
             println!("cargo:error=Unsupported cortex M target: {}", target);
             panic!("Unsupported cortex M target: {}", target);
