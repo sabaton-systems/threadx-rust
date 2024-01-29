@@ -7,4 +7,4 @@ members = [
   "threadx-app/xtask",
 ]
 
-exclude = ["threadx-sys"]
+exclude = ["threadx-sys", "threadx-rs"]
