@@ -6,3 +6,5 @@ members = [
   "threadx-app/host-target-tests",
   "threadx-app/xtask",
 ]
+
+exclude = ["threadx-sys"]
