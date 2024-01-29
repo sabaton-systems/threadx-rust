@@ -1,6 +1,6 @@
 [package]
 name = "threadx-rs"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Sojan James <Sojan.James@gmail.com>"]
 description = "Safe Rust Bindings for ThreadX using threadx-sys"
