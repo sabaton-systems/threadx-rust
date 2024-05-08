@@ -29,6 +29,18 @@ $ rustup target add thumbv7m-none-eabi
 $ rustup target add thumbv7em-none-eabihf
 ```
 
+#### 4. Arm GCC
+
+You will need to install the arm gcc tools.  I downloaded the latest release from https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads . Install manually and add the bin folder
+to your PATH.
+
+#### 5. Others
+
+```console
+$ sudo apt install ninja-build
+$ sudo apt-get install libclang-dev
+```
+
 ## Running
 
 Go to the threadx-app/cross folder and run
