@@ -25,6 +25,7 @@ $ cargo install probe-rs --features cli
 This project is currently set up for the STM32F103.
 
 ``` console
+$ rustup target add thumbv7m-none-eabi
 $ rustup target add thumbv7em-none-eabihf
 ```
 
