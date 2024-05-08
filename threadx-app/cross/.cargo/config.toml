@@ -1,8 +1,8 @@
 [target.'cfg(all(target_arch = "arm", target_os = "none"))']
 # TODO(2) replace `$CHIP` with your chip's name (see `probe-rs chip list` output)
 #runner = "probe-rs run --chip $CHIP"
-# runner = ["probe-rs", "run", "--chip", "$CHIP", "--log-format", "{L} {s}"]
-runner = "probe-run --chip STM32F103C8 --probe 0483:3748"
+#runner = ["probe-rs", "run", "--chip", "$CHIP", "--log-format", "{L} {s}"]
+runner = "probe-rs run --chip STM32F103C8 --probe 0483:3748"
 
 rustflags = [
   "-C", "linker=flip-link",
