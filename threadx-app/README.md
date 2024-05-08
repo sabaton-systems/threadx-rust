@@ -14,6 +14,8 @@ $ cargo install flip-link
 #### 2. `probe-rs`:
 
 ``` console
+$ # install libudev
+$ sudo apt-get install libudev-dev
 $ # make sure to install v0.2.0 or later
 $ cargo install probe-rs --features cli
 ```
