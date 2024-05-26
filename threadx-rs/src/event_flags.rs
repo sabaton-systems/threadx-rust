@@ -78,7 +78,7 @@ impl EventFlagsGroup {
 
 
 
-
+#[deprecated]
 #[derive(Clone)]
 pub struct EventFlagsGroupHandle<'a>(*mut TX_EVENT_FLAGS_GROUP,core::marker::PhantomData<&'a()>);
 
