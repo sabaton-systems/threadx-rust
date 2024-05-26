@@ -5,6 +5,7 @@ use core::time::Duration;
 use threadx_sys::{_tx_thread_suspend, _tx_thread_delete, _tx_thread_sleep};
 use threadx_sys::{TX_THREAD, ULONG, _tx_thread_create, _tx_thread_resume};
 
+use crate::pool::MemoryBlock;
 use crate::time::TxTicks;
 use crate::tx_checked_call;
 
@@ -43,7 +44,7 @@ impl Thread {
         &'static mut self,
         name: &CStr,
         mut entry_function: F,
-        stack :&mut [u8],
+        stack :MemoryBlock,
         priority: u32,
         preempt_threshold: u32,
         time_slice: u32,
@@ -56,6 +57,7 @@ impl Thread {
             panic!("Thread must be initialized only once");
         }
 
+        let stack = stack.consume();
         //convert entry function into a pointer
         let entry_function_ptr = &mut entry_function as *mut _ as *mut c_void;
         //convert to a ULONG

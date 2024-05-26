@@ -20,6 +20,7 @@ UINT        _tx_queue_front_send(TX_QUEUE *queue_ptr, VOID *source_ptr, ULONG wa
 use core::mem::size_of;
 use core::{mem::MaybeUninit, ffi::CStr, marker::PhantomData};
 use threadx_sys::{TX_QUEUE, _tx_queue_create, ULONG, _tx_queue_send, _tx_queue_receive};
+use crate::pool::MemoryBlock;
 use crate::tx_checked_call;
 use super::{error::TxError, WaitOption};
 use defmt::debug;
@@ -40,9 +41,10 @@ impl <T>Queue<T> {
     pub fn initialize(
         &'static mut self,
         name: &CStr,
-        queue_memory: &mut [u8],
+        queue_memory: MemoryBlock,
     ) -> Result<(QueueSender<T>,QueueReceiver<T>), TxError> {       
         let queue_ptr = self.0.as_mut_ptr();
+        let queue_memory = queue_memory.consume();
         if queue_ptr.is_null() {
             panic!("Queue ptr is null");
         }

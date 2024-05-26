@@ -54,8 +54,6 @@ fn main() -> ! {
             let task2_mem = bp.allocate(256, true).unwrap();
             let task3_mem = bp.allocate(256, true).unwrap();
 
-
-            
             let (global_alloc_mem, next) = next.split_at_mut(1024);
             //let  heap_bytepool : BytePoolHandle = unsafe{BP1.initialize(tx_str!("pool2"), bp1_mem).unwrap()};
             #[global_allocator]
@@ -132,7 +130,7 @@ fn main() -> ! {
                         let event = EVENT_GROUP.get(1, threadx_rs::event_flags::GetOption::WaitAllAndClear, WaitOption::WaitForever).unwrap();
                         debug!("Thread3: Got Event 1 : {}", event);
                     }
-                    //sleep(core::time::Duration::from_millis(100)).unwrap();
+
                     
                 }
             };

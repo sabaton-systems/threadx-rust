@@ -3,6 +3,7 @@ use core::ffi::c_void;
 
 use threadx_sys::_tx_initialize_kernel_enter;
 
+
 pub mod pool;
 pub mod thread;
 pub mod error;
@@ -16,6 +17,8 @@ pub mod timer;
 
 pub use threadx_sys::_tx_timer_interrupt as tx_timer_interrupt;
 pub use threadx_sys::__tx_PendSVHandler as tx_pendsv_handler;
+
+
 
 /// Initialize ThreadX
 
@@ -126,12 +129,15 @@ macro_rules! tx_str {
 macro_rules! tx_checked_call {
     ($func:ident($($arg:expr),*)) => {
         {
+            use defmt::error;
+            use defmt::trace;
             let ret = unsafe { $func($($arg),*) };
             if ret != threadx_sys::TX_SUCCESS {
+                
                 error!("ThreadX call {} returned {}", stringify!($func), ret);
                 crate::error::TxResult::Err(TxError::from_u32(ret).unwrap_or(TxError::Unknown))
             } else {
-                //debug!("ThreadX call {} Success", stringify!($func));
+                trace!("ThreadX call {} Success", stringify!($func));
                 crate::error::TxResult::Ok(())
             }
         }

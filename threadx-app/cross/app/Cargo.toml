@@ -1,5 +1,4 @@
 [package]
-# TODO(1) fix `authors` and `name` if you didn't use `cargo-generate`
 authors = ["Sojan James <sojan.james@gmail.com>"]
 name = "threadx-app"
 edition = "2021"
@@ -30,6 +29,9 @@ num-traits = {workspace = true, default-features = false}
 num-derive = {workspace = true}
 stm32f1xx-hal = {workspace = true, features = ["stm32f103", "medium"]}
 
+
+# Non workspace application specific dependencies start here
+## smoltcp = { version = "0.10.0", default-features = false, features = ["log","proto-ipv4"] }
 
 [dev-dependencies]
 defmt-test = "0.3"

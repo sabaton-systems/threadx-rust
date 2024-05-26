@@ -60,6 +60,20 @@ impl BytePool {
         .map(|_| BytePoolHandle::new(pool_ptr))
     }
 }
+
+pub struct MemoryBlock(&'static mut [u8]);
+
+impl MemoryBlock {
+    // Not public as it is constructued by the BytePoolHandle
+    fn new(mem: &'static mut [u8]) -> Self {
+        MemoryBlock(mem)
+    }
+    
+    pub fn consume(self) -> &'static mut [u8] {
+        self.0
+    }
+}
+
 pub struct BytePoolHandle(*mut TX_BYTE_POOL);
 
 impl BytePoolHandle {
@@ -73,7 +87,7 @@ impl BytePoolHandle {
         self.0
     }
 
-    pub fn allocate(&self, size: usize, wait: bool) -> Result<&'static mut [u8], TxError> {
+    pub fn allocate(&self, size: usize, wait: bool) -> Result<MemoryBlock, TxError> {
         let mut ptr: *mut c_void = core::ptr::null_mut() as *mut c_void;
         tx_checked_call!(_tx_byte_allocate(
             self.0,
@@ -81,7 +95,7 @@ impl BytePoolHandle {
             size as ULONG,
             if wait { TX_WAIT_FOREVER } else { TX_NO_WAIT }
         ))
-        .map(|_| unsafe { core::slice::from_raw_parts_mut(ptr as *mut u8, size) })
+        .map(|_| MemoryBlock(unsafe { core::slice::from_raw_parts_mut(ptr as *mut u8, size) }))
     }
 
     pub fn release(&self, mem: &mut [u8]) -> Result<(), TxError> {
