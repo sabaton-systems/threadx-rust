@@ -30,22 +30,21 @@ fn main() -> ! {
         // Start of Application definition
         |mem_start| {
             defmt::println!("Define application. Memory starts at: {} with length:{}", mem_start.as_ptr(), mem_start.len());
-            static mut BP: BytePool = BytePool::new();
-            static mut BP1:BytePool = BytePool::new();
+            static mut BP1: BytePool = BytePool::new();
             static mut BP2:BytePool = BytePool::new();
          
             let (bp_mem , next)= mem_start.split_at_mut(1024);
             
-            let mut bp = unsafe{BP.initialize(tx_str!("pool1"), bp_mem).unwrap()};
+            let mut bp = unsafe{BP1.initialize(tx_str!("pool1"), bp_mem).unwrap()};
             let task_mem = bp.allocate(256, true).unwrap();
             let task2_mem = bp.allocate(256, true).unwrap();
 
             
-            let (bp1_mem, next) = next.split_at_mut(1024);
+            let (global_alloc_mem, next) = next.split_at_mut(1024);
             //let  heap_bytepool : BytePoolHandle = unsafe{BP1.initialize(tx_str!("pool2"), bp1_mem).unwrap()};
             #[global_allocator]
             static mut GLOBAL: ThreadXAllocator = ThreadXAllocator::new();
-            unsafe{GLOBAL.initialize(bp1_mem).unwrap()};
+            unsafe{GLOBAL.initialize(global_alloc_mem).unwrap()};
 
             {
                 let dyn_a = Box::new([10u8;10]);
