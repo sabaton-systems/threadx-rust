@@ -2,9 +2,6 @@
 #![no_std]
 
 
-use core::cell::RefCell;
-use core::iter::Once;
-
 use board::{BoardStm32f103c8BluePill, LowLevelInit};
 
 use defmt::{debug, println};
@@ -22,7 +19,6 @@ use threadx_rs::thread::{Thread, sleep};
 use threadx_rs::tx_str;
 
 extern crate alloc;
-use alloc::boxed::Box;
 use threadx_sys::_tx_event_flags_get;
 
 
@@ -57,6 +53,11 @@ fn main() -> ! {
             let task1_mem = bp.allocate(256, true).unwrap();
             let task2_mem = bp.allocate(256, true).unwrap();
             let queue_mem = bp.allocate(64, true).unwrap();
+            
+
+            #[global_allocator]
+            static mut GLOBAL: ThreadXAllocator = ThreadXAllocator::new();
+            unsafe{GLOBAL.initialize(next).unwrap()};
 
             static mut QUEUE : Queue<Event> = Queue::new();
             let (sender, receiver) = unsafe{QUEUE.initialize(tx_str!("queue"), queue_mem).unwrap()};
@@ -101,8 +102,6 @@ fn main() -> ! {
             let th2_handle = unsafe {
                 thread2.initialize(tx_str!("thread1"), thread2_fn, task2_mem, 1, 1, 0, true).unwrap()
             };
-
-
 
         },
     );
